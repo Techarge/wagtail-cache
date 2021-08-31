@@ -60,6 +60,7 @@ class FetchFromCacheMiddleware(MiddlewareMixin):
     def __init__(self, get_response=None):
         self._wagcache = caches[wagtailcache_settings.WAGTAIL_CACHE_BACKEND]
         self.get_response = get_response
+        super(FetchFromCacheMiddleware, self).__init__(get_response)
 
     def process_request(self, request: WSGIRequest) -> Optional[HttpResponse]:
         if not wagtailcache_settings.WAGTAIL_CACHE:
@@ -123,6 +124,7 @@ class UpdateCacheMiddleware(MiddlewareMixin):
     def __init__(self, get_response=None):
         self._wagcache = caches[wagtailcache_settings.WAGTAIL_CACHE_BACKEND]
         self.get_response = get_response
+        super(UpdateCacheMiddleware, self).__init__(get_response)
 
     def process_response(
         self, request: WSGIRequest, response: HttpResponse
